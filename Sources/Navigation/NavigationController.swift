@@ -1,5 +1,4 @@
 import UIKit
-import Utility
 
 public protocol NavigationControllerDelegate: AnyObject {
     func didPopViewController(viewController: UIViewController?)
@@ -127,9 +126,7 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
                 message: closeConfirmAlertMessage
             ) { [weak self] _ in
                 self?.dismiss(animated: true)
-            } cancelAction: { _ in
-                LogService.log("cencel")
-            }
+            } cancelAction: { _ in }
 
         } else {
             self.dismiss(animated: true)
