@@ -15,54 +15,6 @@ public enum ShowType {
 }
 
 @MainActor
-public protocol FlowBase {
-    associatedtype T
-    associatedtype Child
-
-    var root: Child { get }
-    var navigation: T { get }
-    var from: any FlowController.Type { get }
-    var present: Bool { get }
-    var alertMessageAlignment: NSTextAlignment? { get }
-    var alertTintColor: UIColor? { get }
-
-    init(
-        navigation: T,
-        root: Child,
-        from: any FlowController.Type,
-        present: Bool,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
-    )
-}
-
-@MainActor
-open class BaseFlow<Child>: FlowBase {
-    public let root: Child
-    public let from: any FlowController.Type
-    public let present: Bool
-    public let navigation: NavigationController
-    public let alertMessageAlignment: NSTextAlignment?
-    public let alertTintColor: UIColor?
-
-    public required nonisolated init(
-        navigation: NavigationController,
-        root: Child,
-        from: any FlowController.Type,
-        present: Bool,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
-    ) {
-        self.navigation = navigation
-        self.root = root
-        self.from = from
-        self.present = present
-        self.alertMessageAlignment = alertMessageAlignment
-        self.alertTintColor = alertTintColor
-    }
-}
-
-@MainActor
 public protocol FlowController: UIViewController, FlowBase, FlowAlertPresentable {
     var delegate: FlowDelegate? { get set }
     var childProvider: (Child) -> UIViewController { get }
