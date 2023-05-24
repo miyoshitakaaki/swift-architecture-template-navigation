@@ -14,7 +14,7 @@ public extension UIViewController {
     }
 
     func removeFirstChild() {
-        if let firstChild = self.children.first {
+        if let firstChild = children.first {
             self.remove(child: firstChild)
         }
     }

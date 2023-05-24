@@ -88,15 +88,15 @@ public extension FlowController {
 @MainActor
 public extension FlowController where T == NavigationController {
     func clear() {
-        self.navigation.viewControllers = []
+        navigation.viewControllers = []
     }
 
     var rootViewController: UIViewController? {
-        self.navigation.viewControllers.first
+        navigation.viewControllers.first
     }
 
     func show(_ child: Child, root: Bool = false) {
-        if let provider = self.asyncChildProvider {
+        if let provider = asyncChildProvider {
             Task { @MainActor in
                 let vc = await provider(child)
 
@@ -115,20 +115,20 @@ public extension FlowController where T == NavigationController {
             let vc = self.childProvider(child)
 
             if root {
-                if self.navigation.viewControllers.isEmpty {
-                    add(self.navigation)
-                    self.navigation.viewControllers = [vc]
+                if navigation.viewControllers.isEmpty {
+                    add(navigation)
+                    navigation.viewControllers = [vc]
                 } else {
                     add(vc)
                 }
             } else {
-                self.navigation.pushViewController(vc, animated: true)
+                navigation.pushViewController(vc, animated: true)
             }
         }
     }
 
     func start<F: FlowController>(
-        flowType: F.Type,
+        flowType _: F.Type,
         root: F.Child,
         delegate: FlowDelegate,
         showType: ShowType,
@@ -155,11 +155,11 @@ public extension FlowController where T == NavigationController {
                 .rootViewController as? UIAdaptivePresentationControllerDelegate
             flow.navigation.presentationController?.delegate = self
                 .rootViewController as? UIAdaptivePresentationControllerDelegate
-            self.present(flow, animated: true)
+            present(flow, animated: true)
 
         case .push:
             let flow = F(
-                navigation: self.navigation,
+                navigation: navigation,
                 root: root,
                 from: Self.self,
                 present: false,
@@ -167,7 +167,7 @@ public extension FlowController where T == NavigationController {
                 alertTintColor: alertTintColor
             )
             flow.delegate = delegate
-            self.navigation.pushViewController(flow, animated: true)
+            navigation.pushViewController(flow, animated: true)
         }
     }
 
@@ -176,7 +176,7 @@ public extension FlowController where T == NavigationController {
         case let .normal(title, message):
 
             if let okAction {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -184,7 +184,7 @@ public extension FlowController where T == NavigationController {
                     action: okAction
                 )
             } else {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -192,10 +192,10 @@ public extension FlowController where T == NavigationController {
                 ) { [weak self] _ in
                     guard let self else { return }
 
-                    if self.navigation.viewControllers.count == 1 {
-                        self.dismiss(animated: true)
+                    if navigation.viewControllers.count == 1 {
+                        dismiss(animated: true)
                     } else {
-                        _ = self.navigation.popViewController(animated: true)
+                        _ = navigation.popViewController(animated: true)
                     }
                 }
             }
@@ -203,7 +203,7 @@ public extension FlowController where T == NavigationController {
         case let .auth(title, message):
 
             if let okAction {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -211,7 +211,7 @@ public extension FlowController where T == NavigationController {
                     action: okAction
                 )
             } else {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -222,7 +222,7 @@ public extension FlowController where T == NavigationController {
 
                     self.clear()
 
-                    self.dismiss(animated: true) {
+                    dismiss(animated: true) {
                         self.delegate?.didFinished()
                     }
                 }
@@ -230,7 +230,7 @@ public extension FlowController where T == NavigationController {
 
         case let .notice(title, message):
             if let okAction {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -238,7 +238,7 @@ public extension FlowController where T == NavigationController {
                     action: okAction
                 )
             } else {
-                self.present(
+                present(
                     title: title,
                     message: message,
                     messageAlignment: alertMessageAlignment,
@@ -255,50 +255,47 @@ public extension FlowController where T == NavigationController {
 @MainActor
 public extension FlowController where T == TabBarController {
     func clear() {
-        self.navigation.viewControllers = []
+        navigation.viewControllers = []
     }
 
     var rootViewController: UIViewController? {
-        self.navigation.viewControllers?.first
+        navigation.viewControllers?.first
     }
 
     func show(error: AppError) {
         switch error {
         case let .normal(title, message):
-            self
-                .present(
-                    title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
-                ) { _ in }
+            present(
+                title: title,
+                message: message,
+                messageAlignment: alertMessageAlignment,
+                tintColor: alertTintColor
+            ) { _ in }
 
         case let .auth(title, message):
-            self
-                .present(
-                    title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
-                ) { [weak self] _ in
+            present(
+                title: title,
+                message: message,
+                messageAlignment: alertMessageAlignment,
+                tintColor: alertTintColor
+            ) { [weak self] _ in
 
-                    guard let self else { return }
+                guard let self else { return }
 
-                    self.clear()
+                self.clear()
 
-                    self.dismiss(animated: true) {
-                        self.delegate?.didFinished()
-                    }
+                dismiss(animated: true) {
+                    self.delegate?.didFinished()
                 }
+            }
 
         case let .notice(title, message):
-            self
-                .present(
-                    title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
-                ) { _ in }
+            present(
+                title: title,
+                message: message,
+                messageAlignment: alertMessageAlignment,
+                tintColor: alertTintColor
+            ) { _ in }
 
         case .none:
             break

@@ -12,11 +12,11 @@ public class TabBarController: UITabBarController {
         self.badgeTextAttributesForegroundColor = badgeTextAttributesForegroundColor
         super.init(nibName: nil, bundle: nil)
 
-        self.delegate = self
+        delegate = self
     }
 
     @available(*, unavailable)
-    required init?(coder: NSCoder) {
+    required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
@@ -53,7 +53,7 @@ public class TabBarController: UITabBarController {
 
 extension TabBarController: UITabBarControllerDelegate {
     public func tabBarController(
-        _ tabBarController: UITabBarController,
+        _: UITabBarController,
         shouldSelect viewController: UIViewController
     ) -> Bool {
         NotificationCenter.default.post(

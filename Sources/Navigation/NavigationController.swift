@@ -79,15 +79,15 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
     }
 
     @available(*, unavailable)
-    public required init?(coder aDecoder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
 
-        self.delegate = self
-        self.navigationBar.tintColor = self.navigationTintColor
+        delegate = self
+        navigationBar.tintColor = self.navigationTintColor
         self.closeButton.addTarget(self, action: #selector(self.close), for: .touchUpInside)
     }
 
@@ -99,9 +99,9 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
 
             switch self.closeButtonPosition {
             case .left:
-                self.viewControllers.first?.navigationItem.leftBarButtonItem = closeButtonItem
+                viewControllers.first?.navigationItem.leftBarButtonItem = closeButtonItem
             case .right:
-                self.viewControllers.first?.navigationItem.rightBarButtonItem = closeButtonItem
+                viewControllers.first?.navigationItem.rightBarButtonItem = closeButtonItem
             }
         }
     }
@@ -121,8 +121,8 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
     }
 
     @objc func close() {
-        if let closeConfirmAlertMessage = self.closeConfirmAlertMessage {
-            self.present(
+        if let closeConfirmAlertMessage {
+            present(
                 title: "",
                 message: closeConfirmAlertMessage
             ) { [weak self] _ in
@@ -139,9 +139,9 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
 
 extension NavigationController: UINavigationControllerDelegate {
     public func navigationController(
-        _ navigationController: UINavigationController,
+        _: UINavigationController,
         willShow viewController: UIViewController,
-        animated: Bool
+        animated _: Bool
     ) {
         if self.hideBackButtonText {
             let item = UIBarButtonItem(title: " ", style: .plain, target: nil, action: nil)

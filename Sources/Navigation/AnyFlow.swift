@@ -43,14 +43,14 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController,
     }
 
     @available(*, unavailable)
-    public required init?(coder: NSCoder) {
+    public required init?(coder _: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
     override open func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = .white
+        view.backgroundColor = .white
 
         if self.asyncChildProvider == nil {
             self.start()
@@ -79,7 +79,7 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController,
 
     override open func viewDidDisappear(_ animated: Bool) {
         if self.present {
-            self.clear()
+            clear()
         }
 
         super.viewDidDisappear(animated)
@@ -87,17 +87,17 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController,
 
     override open func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         super.dismiss(animated: flag, completion: completion)
-        guard let presentationController = self.presentationController else {
+        guard let presentationController else {
             return
         }
         presentationController.delegate?.presentationControllerDidDismiss?(presentationController)
     }
 
     open func start() {
-        self.show(self.root, root: true)
+        show(self.root, root: true)
     }
 
     open func didErrorOccured(error: AppError) {
-        self.show(error: error)
+        show(error: error)
     }
 }
