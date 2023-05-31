@@ -103,11 +103,16 @@ public extension FlowController where T == NavigationController {
             }
 
             flow.delegate = delegate
-            flow.presentationController?.delegate = self
-                .rootViewController as? UIAdaptivePresentationControllerDelegate
-            flow.navigation.presentationController?.delegate = self
-                .rootViewController as? UIAdaptivePresentationControllerDelegate
-            present(flow, animated: true)
+
+            if let target = self.presentedViewController as? any FlowController {
+                target.present(flow, animated: true)
+            } else {
+                flow.presentationController?.delegate = self
+                    .rootViewController as? UIAdaptivePresentationControllerDelegate
+                flow.navigation.presentationController?.delegate = self
+                    .rootViewController as? UIAdaptivePresentationControllerDelegate
+                self.present(flow, animated: true)
+            }
 
         case .push:
             let flow = F(
