@@ -38,6 +38,117 @@ public extension FlowController {
 }
 
 @MainActor
+public extension FlowController where T == Never {
+    func start<F: FlowController>(
+        flowType _: F.Type,
+        root: F.Child,
+        delegate: FlowDelegate,
+        showType: ShowType,
+        alertMessageAlignment: NSTextAlignment?,
+        alertTintColor: UIColor?
+    ) where F.T == NavigationController {
+        switch showType {
+        case let .modal(navigation, style):
+            let flow = F(
+                navigation: navigation,
+                root: root,
+                from: Self.self,
+                present: true,
+                alertMessageAlignment: alertMessageAlignment,
+                alertTintColor: alertTintColor
+            )
+
+            if let style {
+                flow.modalPresentationStyle = style
+            }
+
+            flow.delegate = delegate
+
+            if let target = self.presentedViewController as? any FlowController {
+                target.present(flow, animated: true)
+            } else {
+                self.present(flow, animated: true)
+            }
+
+        case .push:
+            fatalError("has not been implemented")
+        }
+    }
+
+    func show(error: AppError, okAction: ((UIAlertAction) -> Void)? = nil) {
+        switch error {
+        case let .normal(title, message):
+
+            if let okAction {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor,
+                    action: okAction
+                )
+            } else {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor
+                ) { _ in }
+            }
+
+        case let .auth(title, message):
+
+            if let okAction {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor,
+                    action: okAction
+                )
+            } else {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor
+                ) { [weak self] _ in
+
+                    guard let self else { return }
+
+                    self.clear()
+
+                    dismiss(animated: true) {
+                        self.delegate?.didFinished()
+                    }
+                }
+            }
+
+        case let .notice(title, message):
+            if let okAction {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor,
+                    action: okAction
+                )
+            } else {
+                present(
+                    title: title,
+                    message: message,
+                    messageAlignment: alertMessageAlignment,
+                    tintColor: alertTintColor
+                ) { _ in }
+            }
+
+        case .none:
+            break
+        }
+    }
+}
+
+@MainActor
 public extension FlowController where T == NavigationController {
     func clear() {
         navigation.viewControllers = []
@@ -217,45 +328,5 @@ public extension FlowController where T == TabBarController {
 
     var rootViewController: UIViewController? {
         navigation.viewControllers?.first
-    }
-
-    func show(error: AppError) {
-        switch error {
-        case let .normal(title, message):
-            present(
-                title: title,
-                message: message,
-                messageAlignment: alertMessageAlignment,
-                tintColor: alertTintColor
-            ) { _ in }
-
-        case let .auth(title, message):
-            present(
-                title: title,
-                message: message,
-                messageAlignment: alertMessageAlignment,
-                tintColor: alertTintColor
-            ) { [weak self] _ in
-
-                guard let self else { return }
-
-                self.clear()
-
-                dismiss(animated: true) {
-                    self.delegate?.didFinished()
-                }
-            }
-
-        case let .notice(title, message):
-            present(
-                title: title,
-                message: message,
-                messageAlignment: alertMessageAlignment,
-                tintColor: alertTintColor
-            ) { _ in }
-
-        case .none:
-            break
-        }
     }
 }
