@@ -21,7 +21,10 @@ open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentab
 
     public var alertTintColor: UIColor? = nil
 
-    public init() {
+    private let flows: [any FlowController]
+
+    public init(flows: [any FlowController]) {
+        self.flows = flows
         super.init(nibName: nil, bundle: nil)
 
         AnalyticsService.log("start")
@@ -35,7 +38,7 @@ open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentab
         alertMessageAlignment: NSTextAlignment?,
         alertTintColor: UIColor?
     ) {
-        super.init(nibName: nil, bundle: nil)
+        fatalError("has not been implemented")
     }
 
     @available(*, unavailable)
@@ -48,5 +51,8 @@ open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentab
         children.first?.view.frame = view.bounds
     }
 
-    open func clear() {}
+    public func clear() {
+        self.flows.forEach { $0.clear() }
+        self.removeFirstChild()
+    }
 }
