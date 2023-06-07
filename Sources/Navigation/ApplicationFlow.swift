@@ -51,6 +51,10 @@ open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentab
         children.first?.view.frame = view.bounds
     }
 
+    open func start() {
+        self.clear()
+    }
+
     public func clear() {
         self.flows.forEach { $0.clear() }
         self.removeFirstChild()
