@@ -53,6 +53,7 @@ open class TabFlow: UIViewController, FlowController {
 
         super.init(nibName: nil, bundle: nil)
 
+        self.navigation.delegate = self
         self.flows.forEach { $0.delegate = self }
     }
 
@@ -89,12 +90,20 @@ open class TabFlow: UIViewController, FlowController {
     public func clear() {
         self.flows.forEach { $0.clear() }
         self.navigation.viewControllers = []
-        self.selectedIndex = 0
     }
 }
 
 extension TabFlow: FlowDelegate {
     public func didFinished() {
         self.delegate?.didFinished()
+    }
+}
+
+extension TabFlow: UITabBarControllerDelegate {
+    public func tabBarController(
+        _ tabBarController: UITabBarController,
+        didSelect viewController: UIViewController
+    ) {
+        self.selectedIndex = self.navigation.selectedIndex
     }
 }
