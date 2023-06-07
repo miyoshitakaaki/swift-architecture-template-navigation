@@ -330,4 +330,40 @@ public extension FlowController where T == TabBarController {
     var rootViewController: UIViewController? {
         navigation.viewControllers?.first
     }
+
+    func start<F: FlowController>(
+        flowType _: F.Type,
+        root: F.Child,
+        delegate: FlowDelegate,
+        showType: ShowType,
+        alertMessageAlignment: NSTextAlignment?,
+        alertTintColor: UIColor?
+    ) where F.T == NavigationController {
+        switch showType {
+        case let .modal(navigation, style):
+            let flow = F(
+                navigation: navigation,
+                root: root,
+                from: Self.self,
+                present: true,
+                alertMessageAlignment: alertMessageAlignment,
+                alertTintColor: alertTintColor
+            )
+
+            if let style {
+                flow.modalPresentationStyle = style
+            }
+
+            flow.delegate = delegate
+
+            if let target = self.presentedViewController as? any FlowController {
+                target.present(flow, animated: true)
+            } else {
+                self.present(flow, animated: true)
+            }
+
+        case .push:
+            fatalError("has not been implemented")
+        }
+    }
 }

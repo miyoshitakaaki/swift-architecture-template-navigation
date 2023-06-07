@@ -81,7 +81,7 @@ open class TabFlow: UIViewController, FlowController {
         children.first?.view.frame = view.bounds
     }
 
-    public func start() {
+    open func start() {
         self.navigation.setViewControllers(self.flows, animated: false)
         self.navigation.selectedIndex = self.selectedIndex
         add(self.navigation)
