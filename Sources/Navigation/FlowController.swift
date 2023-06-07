@@ -19,6 +19,7 @@ public protocol FlowController: UIViewController, FlowBase, FlowAlertPresentable
     var delegate: FlowDelegate? { get set }
     var childProvider: (Child) -> UIViewController { get }
     var asyncChildProvider: ((Child) async -> UIViewController)? { get }
+    func start()
     func clear()
 }
 
