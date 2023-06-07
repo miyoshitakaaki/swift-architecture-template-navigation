@@ -106,4 +106,28 @@ extension TabFlow: UITabBarControllerDelegate {
     ) {
         self.selectedIndex = self.navigation.selectedIndex
     }
+
+    public func tabBarController(
+        _: UITabBarController,
+        shouldSelect viewController: UIViewController
+    ) -> Bool {
+        guard let flow = viewController as? (any FlowController) else { return true }
+
+        guard let nav = flow.navigation as? UINavigationController else { return true }
+
+        guard let topController = nav.viewControllers.last else { return true }
+
+        if !topController.isScrolledToTop {
+            topController.scrollToTop()
+            return false
+        } else {
+            if let webView = topController.findWebView() {
+                webView.goBack()
+            } else {
+                nav.popViewController(animated: true)
+            }
+
+            return true
+        }
+    }
 }

@@ -2,17 +2,12 @@ import UIKit
 import WebKit
 
 public class TabBarController: UITabBarController {
-    public static let tabSelectedNotificationName: Notification
-        .Name = .init(rawValue: "tab.selected")
-
     private let tintColor: UIColor, badgeTextAttributesForegroundColor: UIColor
 
     public init(tintColor: UIColor, badgeTextAttributesForegroundColor: UIColor) {
         self.tintColor = tintColor
         self.badgeTextAttributesForegroundColor = badgeTextAttributesForegroundColor
         super.init(nibName: nil, bundle: nil)
-
-        delegate = self
     }
 
     @available(*, unavailable)
@@ -48,90 +43,5 @@ public class TabBarController: UITabBarController {
         if #available(iOS 15.0, *) {
             tabBar.scrollEdgeAppearance = tabBarAppearance
         }
-    }
-}
-
-extension TabBarController: UITabBarControllerDelegate {
-    public func tabBarController(
-        _: UITabBarController,
-        shouldSelect viewController: UIViewController
-    ) -> Bool {
-        NotificationCenter.default.post(
-            name: Self.tabSelectedNotificationName,
-            object: nil,
-            userInfo: nil
-        )
-
-        guard let viewControllers else { return false }
-
-        guard viewController == viewControllers[selectedIndex] else { return true }
-
-        guard let flow = viewController as? (any FlowController) else { return true }
-
-        guard let nav = flow.navigation as? UINavigationController else { return true }
-
-        guard let topController = nav.viewControllers.last else { return true }
-
-        if !topController.isScrolledToTop {
-            topController.scrollToTop()
-            return false
-        } else {
-            if let webView = topController.findWebView() {
-                webView.goBack()
-            } else {
-                nav.popViewController(animated: true)
-            }
-
-            return true
-        }
-    }
-}
-
-private extension UIViewController {
-    func scrollToTop() {
-        func scrollToTop(view: UIView?) {
-            guard let view else { return }
-
-            switch view {
-            case let scrollView as UIScrollView:
-                if scrollView.scrollsToTop == true {
-                    scrollView.setContentOffset(
-                        CGPoint(x: 0.0, y: -scrollView.contentInset.top),
-                        animated: true
-                    )
-                    return
-                }
-            default:
-                break
-            }
-
-            for subView in view.subviews {
-                scrollToTop(view: subView)
-            }
-        }
-
-        scrollToTop(view: view)
-    }
-
-    var isScrolledToTop: Bool {
-        for subView in view.subviews {
-            if let scrollView = subView as? UIScrollView {
-                return scrollView.contentOffset.y == 0
-            }
-
-            if let webview = subView as? WKWebView {
-                return webview.scrollView.contentOffset.y == 0
-            }
-        }
-
-        return true
-    }
-
-    func findWebView() -> WKWebView? {
-        for subView in view.subviews {
-            return subView as? WKWebView
-        }
-
-        return nil
     }
 }
