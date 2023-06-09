@@ -20,10 +20,8 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
     public init(
         hideBackButtonText: Bool = false,
         showCloseButton: Bool = false,
-        closeButtonTitle: String,
-        closeButtonFontSize: CGFloat,
+        closeButton: UIButton,
         closeButtonPosition: CloseButtonPosition,
-        closeButtonColor: UIColor,
         navigationTintColor: UIColor,
         closeConfirmAlertMessage: String? = nil
     ) {
@@ -32,14 +30,7 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
         self.closeButtonPosition = closeButtonPosition
         self.navigationTintColor = navigationTintColor
         self.closeConfirmAlertMessage = closeConfirmAlertMessage
-
-        self.closeButton = {
-            let button = UIButton()
-            button.titleLabel?.font = .systemFont(ofSize: closeButtonFontSize)
-            button.setTitle(closeButtonTitle, for: .normal)
-            button.setTitleColor(closeButtonColor, for: .normal)
-            return button
-        }()
+        self.closeButton = closeButton
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -47,10 +38,8 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
         rootViewController: UIViewController,
         hideBackButtonText: Bool = false,
         showCloseButton: Bool = false,
-        closeButtonTitle: String,
-        closeButtonFontSize: CGFloat,
+        closeButton: UIButton,
         closeButtonPosition: CloseButtonPosition,
-        closeButtonColor: UIColor,
         navigationTintColor: UIColor,
         closeConfirmAlertMessage: String? = nil
     ) {
@@ -59,14 +48,7 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
         self.closeButtonPosition = closeButtonPosition
         self.navigationTintColor = navigationTintColor
         self.closeConfirmAlertMessage = closeConfirmAlertMessage
-
-        self.closeButton = {
-            let button = UIButton()
-            button.titleLabel?.font = .systemFont(ofSize: closeButtonFontSize)
-            button.setTitle(closeButtonTitle, for: .normal)
-            button.setTitleColor(closeButtonColor, for: .normal)
-            return button
-        }()
+        self.closeButton = closeButton
 
         super.init(rootViewController: rootViewController)
     }
