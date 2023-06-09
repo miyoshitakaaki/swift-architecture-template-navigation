@@ -1,9 +1,5 @@
 import UIKit
 
-public protocol NavigationControllerDelegate: AnyObject {
-    func didPopViewController(viewController: UIViewController?)
-}
-
 open class NavigationController: UINavigationController, FlowAlertPresentable {
     public enum CloseButtonPosition {
         case left, right
@@ -20,8 +16,6 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
     private let navigationTintColor: UIColor
 
     private let closeConfirmAlertMessage: String?
-
-    public weak var navigationControllerDelegate: NavigationControllerDelegate?
 
     public init(
         hideBackButtonText: Bool = false,
@@ -103,12 +97,6 @@ open class NavigationController: UINavigationController, FlowAlertPresentable {
                 viewControllers.first?.navigationItem.rightBarButtonItem = closeButtonItem
             }
         }
-    }
-
-    override open func popViewController(animated: Bool) -> UIViewController? {
-        let vc = super.popViewController(animated: animated)
-        self.navigationControllerDelegate?.didPopViewController(viewController: vc)
-        return vc
     }
 
     override public func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
