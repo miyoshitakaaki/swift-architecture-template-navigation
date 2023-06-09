@@ -2,7 +2,7 @@ import UIKit
 import Utility
 
 @MainActor
-open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController,
+open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController, FlowDelegate,
     FlowAlertPresentable where Flow.T == NavigationController
 {
     open var childProvider: (Flow.Child) -> UIViewController {{ _ in
@@ -99,5 +99,11 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController,
 
     open func didErrorOccured(error: AppError) {
         show(error: error)
+    }
+
+    open func didFinished() {
+        self.dismiss(animated: true) {
+            self.delegate?.didFinished()
+        }
     }
 }
