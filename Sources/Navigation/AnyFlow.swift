@@ -101,9 +101,5 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController, FlowDelega
         show(error: error)
     }
 
-    open func didFinished() {
-        self.dismiss(animated: true) {
-            self.delegate?.didFinished()
-        }
-    }
+    open func didFinished() {}
 }
