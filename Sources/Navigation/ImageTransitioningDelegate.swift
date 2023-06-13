@@ -1,12 +1,12 @@
 import UIKit
 
-public final class TransitioningDelegate<
+public final class ImageTransitioningDelegate<
     Presenting: UIViewController,
     Presented: ImageDestinationTransitionType
 >: NSObject, UIViewControllerTransitioningDelegate {
-    weak var targetView: ImageSourceTransitionType?
+    weak var targetView: UIImageView?
 
-    public init(targetView: ImageSourceTransitionType) {
+    public init(targetView: UIImageView) {
         self.targetView = targetView
     }
 

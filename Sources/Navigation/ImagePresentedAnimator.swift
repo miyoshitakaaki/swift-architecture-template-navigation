@@ -4,11 +4,11 @@ class ImagePresentedAnimator<
     Presenting: UIViewController,
     Presented: ImageDestinationTransitionType
 >: NSObject, UIViewControllerAnimatedTransitioning {
-    weak var targetView: ImageSourceTransitionType?
+    weak var targetView: UIImageView?
 
     private let duration: TimeInterval = 1
 
-    init(targetView: ImageSourceTransitionType) {
+    init(targetView: UIImageView) {
         self.targetView = targetView
     }
 
@@ -45,14 +45,14 @@ class ImagePresentedAnimator<
         let animationView = UIView(frame: presenting.view.frame)
         animationView.backgroundColor = .white.withAlphaComponent(0)
 
-        let frame = targetView.imageView.superview!.convert(
-            targetView.imageView.frame,
+        let frame = targetView.superview!.convert(
+            targetView.frame,
             to: animationView
         )
 
         let imageView = UIImageView(frame: frame)
-        imageView.image = targetView.imageView.image
-        imageView.contentMode = targetView.imageView.contentMode
+        imageView.image = targetView.image
+        imageView.contentMode = targetView.contentMode
         animationView.addSubview(imageView)
         containerView.addSubview(animationView)
 

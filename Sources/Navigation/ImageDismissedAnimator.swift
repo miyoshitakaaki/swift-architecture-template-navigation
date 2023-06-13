@@ -4,11 +4,11 @@ class ImageDismissedAnimator<
     Presenting: UIViewController,
     Presented: ImageDestinationTransitionType
 >: NSObject, UIViewControllerAnimatedTransitioning {
-    weak var targetView: ImageSourceTransitionType?
+    weak var targetView: UIImageView?
 
     private let duration: TimeInterval = 1
 
-    init(targetView: ImageSourceTransitionType) {
+    init(targetView: UIImageView) {
         self.targetView = targetView
     }
 
@@ -49,8 +49,8 @@ class ImageDismissedAnimator<
         animationView.addSubview(imageView)
         containerView.addSubview(animationView)
 
-        let destinationFrame = targetView.imageView.superview!.convert(
-            targetView.imageView.frame,
+        let destinationFrame = targetView.superview!.convert(
+            targetView.frame,
             to: containerView
         )
 
