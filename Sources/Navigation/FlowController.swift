@@ -11,7 +11,8 @@ public enum ShowType {
         navigation: NavigationController,
         modalPresentationStyle: UIModalPresentationStyle? = nil
     ),
-        push
+        push,
+        add
 }
 
 @MainActor
@@ -72,6 +73,9 @@ public extension FlowController where T == Never {
             }
 
         case .push:
+            fatalError("has not been implemented")
+
+        case .add:
             fatalError("has not been implemented")
         }
     }
@@ -237,6 +241,20 @@ public extension FlowController where T == NavigationController {
             )
             flow.delegate = delegate
             navigation.pushViewController(flow, animated: true)
+
+        case .add:
+            let flow = F(
+                navigation: navigation,
+                root: root,
+                from: Self.self,
+                present: true,
+                alertMessageAlignment: alertMessageAlignment,
+                alertTintColor: alertTintColor
+            )
+
+            flow.delegate = delegate
+
+            self.add(flow)
         }
     }
 
@@ -363,6 +381,9 @@ public extension FlowController where T == TabBarController {
             }
 
         case .push:
+            fatalError("has not been implemented")
+
+        case .add:
             fatalError("has not been implemented")
         }
     }
