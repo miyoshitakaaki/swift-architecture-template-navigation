@@ -57,7 +57,26 @@ class ImagePresentedAnimator<
         containerView.addSubview(animationView)
 
         let animation = UIViewPropertyAnimator(duration: duration, dampingRatio: 1) {
-            imageView.frame = presented.imageView.frame
+            if presented.imageView.frame.size.width < presented.imageView.frame.size.height {
+                let width = presented.imageView.frame.size.width
+                let height: CGFloat = frame.size.height / frame.size.width * width
+
+                imageView.frame.size = .init(
+                    width: width,
+                    height: height
+                )
+            } else {
+                let height = presented.imageView.frame.size.height
+                let width = frame.size.width / frame.size.height * height
+
+                imageView.frame.size = .init(
+                    width: width,
+                    height: height
+                )
+            }
+
+            imageView.center = presented.imageView.center
+
             animationView.backgroundColor = .white.withAlphaComponent(1)
         }
 
