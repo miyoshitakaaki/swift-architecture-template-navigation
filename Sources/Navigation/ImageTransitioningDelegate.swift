@@ -5,6 +5,7 @@ public final class ImageTransitioningDelegate<
     Presented: ImageDestinationTransitionType
 >: NSObject, UIViewControllerTransitioningDelegate {
     weak var targetView: UIImageView?
+    public var useImageDismissedAnimator = true
 
     public init(targetView: UIImageView) {
         self.targetView = targetView
@@ -20,11 +21,11 @@ public final class ImageTransitioningDelegate<
         )
     }
 
-    public func animationController(forDismissed dismissed: UIViewController)
-        -> UIViewControllerAnimatedTransitioning?
-    {
-        ImageDismissedAnimator<Presenting, Presented>(
-            targetView: self.targetView!
-        )
+    public func animationController(
+        forDismissed dismissed: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        self.useImageDismissedAnimator
+            ? ImageDismissedAnimator<Presenting, Presented>(targetView: self.targetView!)
+            : nil
     }
 }
