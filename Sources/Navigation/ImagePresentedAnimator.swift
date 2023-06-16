@@ -43,7 +43,7 @@ class ImagePresentedAnimator<
         containerView.addSubview(presented.view)
 
         let animationView = UIView(frame: presenting.view.frame)
-        animationView.backgroundColor = .white.withAlphaComponent(0)
+        animationView.backgroundColor = presented.view.backgroundColor?.withAlphaComponent(0)
 
         let frame = targetView.superview!.convert(
             targetView.frame,
@@ -77,7 +77,7 @@ class ImagePresentedAnimator<
 
             imageView.center = presented.imageView.center
 
-            animationView.backgroundColor = .white.withAlphaComponent(1)
+            animationView.backgroundColor = presented.view.backgroundColor?.withAlphaComponent(1)
         }
 
         animation.addCompletion { _ in
