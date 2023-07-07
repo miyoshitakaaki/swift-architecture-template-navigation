@@ -117,9 +117,13 @@ extension TabFlow: UITabBarControllerDelegate {
 
         guard let topController = nav.viewControllers.last else { return true }
 
+        guard
+            let index = self.navigation.viewControllers?.firstIndex(of: viewController),
+            index == selectedIndex else { return true }
+
         if !topController.isScrolledToTop {
             topController.scrollToTop()
-            return false
+            return true
         } else {
             if let webView = topController.findWebView() {
                 webView.goBack()
