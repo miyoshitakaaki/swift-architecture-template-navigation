@@ -66,7 +66,15 @@ public extension FlowController where T == Never {
 
             flow.delegate = delegate
 
-            if let target = self.presentedViewController as? any FlowController {
+            let topViewController: UIViewController? = {
+                var vc: UIViewController? = self
+                while vc?.presentedViewController != nil {
+                    vc = vc?.presentedViewController
+                }
+                return vc
+            }()
+
+            if let target = topViewController as? any FlowController {
                 target.present(flow, animated: true)
             } else {
                 self.present(flow, animated: true)
