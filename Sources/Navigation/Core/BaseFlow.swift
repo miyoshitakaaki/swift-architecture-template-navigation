@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 
 @MainActor
@@ -25,3 +26,4 @@ open class BaseFlow<Child>: FlowBase {
         self.alertTintColor = alertTintColor
     }
 }
+#endif

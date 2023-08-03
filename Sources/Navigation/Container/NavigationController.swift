@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 
 open class NavigationController: UINavigationController, FlowAlertPresentable {
@@ -116,3 +117,4 @@ extension NavigationController: UINavigationControllerDelegate {
         }
     }
 }
+#endif

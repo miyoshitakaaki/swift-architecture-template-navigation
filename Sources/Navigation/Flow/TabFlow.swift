@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 
 open class TabFlow: UIViewController, FlowController {
@@ -135,3 +136,4 @@ extension TabFlow: UITabBarControllerDelegate {
         }
     }
 }
+#endif

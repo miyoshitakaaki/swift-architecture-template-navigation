@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 import Utility
 
@@ -62,3 +63,4 @@ import Utility
         self.removeFirstChild()
     }
 }
+#endif

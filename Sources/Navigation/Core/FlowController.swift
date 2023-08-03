@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 import Utility
 
@@ -396,3 +397,4 @@ public extension FlowController where T == TabBarController {
         }
     }
 }
+#endif

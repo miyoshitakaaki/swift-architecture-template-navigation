@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 import Utility
 
@@ -103,3 +104,4 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController, FlowDelega
 
     open func didFinished() {}
 }
+#endif

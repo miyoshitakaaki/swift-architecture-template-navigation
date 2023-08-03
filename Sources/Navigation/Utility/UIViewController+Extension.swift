@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 import WebKit
 
@@ -49,3 +50,4 @@ extension UIViewController {
         return nil
     }
 }
+#endif

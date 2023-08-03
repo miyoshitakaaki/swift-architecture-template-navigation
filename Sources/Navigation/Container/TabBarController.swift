@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 import WebKit
 
@@ -45,3 +46,4 @@ public class TabBarController: UITabBarController {
         }
     }
 }
+#endif

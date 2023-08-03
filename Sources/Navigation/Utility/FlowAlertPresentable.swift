@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 
 public protocol FlowAlertPresentable: UIViewController {}
@@ -96,3 +97,4 @@ public extension FlowAlertPresentable {
         self.present(alert, animated: true)
     }
 }
+#endif

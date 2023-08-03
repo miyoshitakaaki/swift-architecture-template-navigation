@@ -7,16 +7,16 @@ Screen transitions using Navigation framework
 The Navigation framework mainly handles screen transitions, including alert dialog and launch other application.
 This framework takes FlowController as its basic concept and provides practical practices of FlowController.
 
-This framework core is ``FlowController`` protocol. Each Flows conform to this protocol.
+This framework core is FlowController protocol. Each Flows conform to this protocol.
 
-The three flows which is used mainly are ``ApplicationFlow``, ``TabFlow``, and ``AnyFlow``.
+The three flows which is used mainly are ApplicationFlow, TabFlow, and AnyFlow.
 
-``ApplicationFlow`` handles transitions for the entire application.
+ApplicationFlow handles transitions for the entire application.
 Transitions from push notifications and deepLink such as universal links is handled.
 
-``TabFlow`` handle UITabBarController transition.
+TabFlow handle UITabBarController transition.
 
-``AnyFlow`` handle mainly UINavigationController transition.
+AnyFlow handle mainly UINavigationController transition.
 A FlowChild must be defined for each AnyFlow.
 Each FlowChild corresponds to a screen, and each screen must belongs to one of the Flows.
 

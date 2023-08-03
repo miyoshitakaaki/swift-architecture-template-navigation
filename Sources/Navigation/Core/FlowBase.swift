@@ -1,3 +1,4 @@
+#if !os(macOS)
 import UIKit
 
 @MainActor
@@ -21,3 +22,4 @@ public protocol FlowBase {
         alertTintColor: UIColor?
     )
 }
+#endif
