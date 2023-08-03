@@ -1,0 +1,21 @@
+@Tutorial(time: 20) {
+    @Intro(title: "Tutorial") {
+        using Navigation framework
+    }
+    
+    @Section(title: "setup project") {
+        @ContentAndMedia {
+            setup project
+        }
+        
+        @Steps {
+            @Step {
+                create project
+            }
+            
+            @Step {
+                introduce packge
+            }
+        }
+    }
+}
