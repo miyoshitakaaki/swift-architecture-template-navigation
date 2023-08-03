@@ -1,8 +1,8 @@
 import UIKit
 import Utility
 
-@MainActor
-open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentable {
+/// Handle screen transitions throughout the application
+@MainActor open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentable {
     public enum Child {
         case none
     }
@@ -23,6 +23,8 @@ open class ApplicationFlow: UIViewController, FlowController, FlowAlertPresentab
 
     private let flows: [any FlowController]
 
+    /// ApplicationFlow init
+    /// - Parameter flows: flows managed by ApplicationFlow
     public init(flows: [any FlowController]) {
         self.flows = flows
         super.init(nibName: nil, bundle: nil)

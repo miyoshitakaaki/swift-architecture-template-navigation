@@ -15,7 +15,7 @@ open class TabFlow: UIViewController, FlowController {
         }
     }
 
-    public let navigation: TabBarController
+    public let navigation: UITabBarController
 
     public let root: Child = .none
 
@@ -28,7 +28,7 @@ open class TabFlow: UIViewController, FlowController {
     public let alertTintColor: UIColor?
 
     public required init(
-        navigation: TabBarController,
+        navigation: UITabBarController,
         root: Child,
         from: any FlowController.Type,
         present: Bool,
@@ -39,7 +39,7 @@ open class TabFlow: UIViewController, FlowController {
     }
 
     public init(
-        navigation: TabBarController,
+        navigation: UITabBarController,
         from: any FlowController.Type,
         alertMessageAlignment: NSTextAlignment?,
         alertTintColor: UIColor?,
