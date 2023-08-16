@@ -6,6 +6,8 @@ Mobile architecture framework inspired by FlowController.
 
 this framework handle screen transition.
 
-## Essentials
+## Topics
+
+### Essentials
 
 - <doc:Tutorial>
