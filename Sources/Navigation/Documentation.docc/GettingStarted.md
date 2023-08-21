@@ -131,12 +131,8 @@ Each FlowChild corresponds to a screen, and each screen must belongs to one of t
    }
 }
 
----
+- Note: It is recommended that the flow properties of the ApplicationFlow and TabFlow are defined to be let. A clear method is provided for initialization.
 
-It is recommended that the flow of the ApplicationFlow and TabFlow properties be let.
-A clear method is provided for initialization.
-
----
 
 AppDelegate has ApplicationFlow like below.
 
@@ -161,6 +157,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 ```
 
 There are two types of screen transitions using Flow, `start` and `show`.
+
+### start
+
 - `start` is used to create another Flow from a Flow.
 - it is required to use start in order to present modal.
 
@@ -173,6 +172,7 @@ self.start(
 )
 ```
 
+### show
 
 - `show` is used for transitions between FlowChilds in a Flow.
 
