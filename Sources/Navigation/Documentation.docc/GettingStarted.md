@@ -131,6 +131,13 @@ Each FlowChild corresponds to a screen, and each screen must belongs to one of t
    }
 }
 
+---
+
+It is recommended that the flow of the ApplicationFlow and TabFlow properties be let.
+A clear method is provided for initialization.
+
+---
+
 AppDelegate has ApplicationFlow like below.
 
 ```swift
