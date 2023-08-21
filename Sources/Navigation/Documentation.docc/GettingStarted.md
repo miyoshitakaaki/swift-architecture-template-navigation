@@ -155,6 +155,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 There are two types of screen transitions using Flow, `start` and `show`.
 - `start` is used to create another Flow from a Flow.
+- it is required to use start in order to present modal.
 
 ```swift
 self.start(
