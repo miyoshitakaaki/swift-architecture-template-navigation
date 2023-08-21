@@ -6,6 +6,7 @@ Mobile architecture framework inspired by FlowController.
 
 this framework handle screen transition.
 
-## Docs
+## Generate docs
 
-`swift package --allow-writing-to-directory ./docs generate-documentation --target Navigation --disable-indexing --output-path ./docs --transform-for-static-hosting --hosting-base-path swift-architecture-template-navigation`
+- `make` or `make create_doc`
+
