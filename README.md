@@ -12,7 +12,6 @@ this framework handle screen transition.
 
 ## Documentation
 
-- [Tutorial](https://miyoshi-cq.github.io/swift-architecture-template-navigation/tutorials/navigation/tutorial)
 - [Getting Started](https://miyoshi-cq.github.io/swift-architecture-template-navigation/documentation/navigation/gettingstarted)
 - [Usage of respondor chain](https://miyoshi-cq.github.io/swift-architecture-template-navigation/documentation/navigation/respondorchainusage)
 
