@@ -18,10 +18,6 @@ import Utility
 
     public weak var delegate: FlowDelegate?
 
-    public var alertMessageAlignment: NSTextAlignment? = nil
-
-    public var alertTintColor: UIColor? = nil
-
     private let flows: [any FlowController]
 
     /// ApplicationFlow init
@@ -37,9 +33,7 @@ import Utility
         navigation: Never,
         root: Child,
         from: any FlowController.Type,
-        present: Bool,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        present: Bool
     ) {
         fatalError("has not been implemented")
     }

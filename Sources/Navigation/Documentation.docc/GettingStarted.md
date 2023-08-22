@@ -41,9 +41,7 @@ Each FlowChild corresponds to a screen, and each screen must belongs to one of t
                navigation: Never,
                root: ApplicationFlow.Child,
                from: any FlowController.Type,
-               present: Bool,
-               alertMessageAlignment: NSTextAlignment?,
-               alertTintColor: UIColor?
+               present: Bool
            ) {
                fatalError("has not been implemented")
            }
@@ -83,8 +81,6 @@ Each FlowChild corresponds to a screen, and each screen must belongs to one of t
                super.init(
                    navigation: UITabBarController(),
                    from: AppFlow.self,
-                   alertMessageAlignment: nil,
-                   alertTintColor: nil,
                    flows: flows
                )
            }
@@ -93,9 +89,7 @@ Each FlowChild corresponds to a screen, and each screen must belongs to one of t
                navigation: TabBarController,
                root: TabFlow.Child,
                from: any FlowController.Type,
-               present: Bool,
-               alertMessageAlignment: NSTextAlignment?,
-               alertTintColor: UIColor?
+               present: Bool
            ) {
                fatalError("has not been implemented")
            }

@@ -7,8 +7,6 @@ public extension FlowAlertPresentable {
     func present(
         title: String,
         message: String,
-        messageAlignment: NSTextAlignment? = nil,
-        tintColor: UIColor? = nil,
         okButtonTitle: String = "OK",
         action: @escaping (UIAlertAction) -> Void
     ) {
@@ -17,24 +15,6 @@ public extension FlowAlertPresentable {
             message: message,
             preferredStyle: .alert
         )
-
-        if let messageAlignment {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = messageAlignment
-            let messageText = NSAttributedString(
-                string: message,
-                attributes: [
-                    NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
-                ]
-            )
-
-            alert.setValue(messageText, forKey: "attributedMessage")
-        }
-
-        if let tintColor {
-            alert.view.tintColor = tintColor
-        }
 
         alert.addAction(
             .init(
@@ -49,8 +29,6 @@ public extension FlowAlertPresentable {
     func present(
         title: String,
         message: String,
-        messageAlignment: NSTextAlignment? = nil,
-        tintColor: UIColor? = nil,
         okButtonTitle: String = "OK",
         cancelButtonTitle: String = "キャンセル",
         okAction: @escaping (UIAlertAction) -> Void,
@@ -61,24 +39,6 @@ public extension FlowAlertPresentable {
             message: message,
             preferredStyle: .alert
         )
-
-        if let messageAlignment {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = messageAlignment
-            let messageText = NSAttributedString(
-                string: message,
-                attributes: [
-                    NSAttributedString.Key.paragraphStyle: paragraphStyle,
-                    NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13),
-                ]
-            )
-
-            alert.setValue(messageText, forKey: "attributedMessage")
-        }
-
-        if let tintColor {
-            alert.view.tintColor = tintColor
-        }
 
         alert.addAction(
             .init(

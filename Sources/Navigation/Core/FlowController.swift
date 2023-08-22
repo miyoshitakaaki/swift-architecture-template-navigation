@@ -46,9 +46,7 @@ public extension FlowController where T == Never {
         flowType _: F.Type,
         root: F.Child,
         delegate: FlowDelegate,
-        showType: ShowType,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        showType: ShowType
     ) where F.T == NavigationController {
         switch showType {
         case let .modal(navigation, style):
@@ -56,9 +54,7 @@ public extension FlowController where T == Never {
                 navigation: navigation,
                 root: root,
                 from: Self.self,
-                present: true,
-                alertMessageAlignment: alertMessageAlignment,
-                alertTintColor: alertTintColor
+                present: true
             )
 
             if let style {
@@ -97,16 +93,12 @@ public extension FlowController where T == Never {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { _ in }
             }
 
@@ -116,16 +108,12 @@ public extension FlowController where T == Never {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { [weak self] _ in
 
                     guard let self else { return }
@@ -143,16 +131,12 @@ public extension FlowController where T == Never {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { _ in }
             }
 
@@ -208,9 +192,7 @@ public extension FlowController where T == NavigationController {
         flowType _: F.Type,
         root: F.Child,
         delegate: FlowDelegate,
-        showType: ShowType,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        showType: ShowType
     ) where F.T == NavigationController {
         switch showType {
         case let .modal(navigation, style):
@@ -218,9 +200,7 @@ public extension FlowController where T == NavigationController {
                 navigation: navigation,
                 root: root,
                 from: Self.self,
-                present: true,
-                alertMessageAlignment: alertMessageAlignment,
-                alertTintColor: alertTintColor
+                present: true
             )
 
             if let style {
@@ -244,9 +224,7 @@ public extension FlowController where T == NavigationController {
                 navigation: navigation,
                 root: root,
                 from: Self.self,
-                present: false,
-                alertMessageAlignment: alertMessageAlignment,
-                alertTintColor: alertTintColor
+                present: false
             )
             flow.delegate = delegate
             navigation.pushViewController(flow, animated: true)
@@ -256,9 +234,7 @@ public extension FlowController where T == NavigationController {
                 navigation: navigation,
                 root: root,
                 from: Self.self,
-                present: true,
-                alertMessageAlignment: alertMessageAlignment,
-                alertTintColor: alertTintColor
+                present: true
             )
 
             flow.delegate = delegate
@@ -275,16 +251,12 @@ public extension FlowController where T == NavigationController {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { [weak self] _ in
                     guard let self else { return }
 
@@ -302,16 +274,12 @@ public extension FlowController where T == NavigationController {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { [weak self] _ in
 
                     guard let self else { return }
@@ -329,16 +297,12 @@ public extension FlowController where T == NavigationController {
                 present(
                     title: title,
                     message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor,
                     action: okAction
                 )
             } else {
                 present(
                     title: title,
-                    message: message,
-                    messageAlignment: alertMessageAlignment,
-                    tintColor: alertTintColor
+                    message: message
                 ) { _ in }
             }
 
@@ -362,9 +326,7 @@ public extension FlowController where T == TabBarController {
         flowType _: F.Type,
         root: F.Child,
         delegate: FlowDelegate,
-        showType: ShowType,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        showType: ShowType
     ) where F.T == NavigationController {
         switch showType {
         case let .modal(navigation, style):
@@ -372,9 +334,7 @@ public extension FlowController where T == TabBarController {
                 navigation: navigation,
                 root: root,
                 from: Self.self,
-                present: true,
-                alertMessageAlignment: alertMessageAlignment,
-                alertTintColor: alertTintColor
+                present: true
             )
 
             if let style {

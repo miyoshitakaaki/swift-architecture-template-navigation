@@ -24,17 +24,11 @@ open class TabFlow: UIViewController, FlowController {
 
     public let present = false
 
-    public let alertMessageAlignment: NSTextAlignment?
-
-    public let alertTintColor: UIColor?
-
     public required init(
         navigation: UITabBarController,
         root: Child,
         from: any FlowController.Type,
-        present: Bool,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        present: Bool
     ) {
         fatalError("has not been implemented")
     }
@@ -42,15 +36,11 @@ open class TabFlow: UIViewController, FlowController {
     public init(
         navigation: UITabBarController,
         from: any FlowController.Type,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?,
         flows: [any FlowController]
     ) {
         self.navigation = navigation
         self.from = from
         self.flows = flows
-        self.alertMessageAlignment = alertMessageAlignment
-        self.alertTintColor = alertTintColor
 
         super.init(nibName: nil, bundle: nil)
 

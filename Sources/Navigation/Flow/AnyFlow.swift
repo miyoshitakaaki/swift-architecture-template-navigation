@@ -20,26 +20,18 @@ open class AnyFlow<Flow: FlowBase>: UIViewController, FlowController, FlowDelega
 
     public let from: any FlowController.Type
 
-    public let alertMessageAlignment: NSTextAlignment?
-
-    public let alertTintColor: UIColor?
-
     public let present: Bool
 
     public required init(
         navigation: NavigationController,
         root: Flow.Child,
         from: any FlowController.Type,
-        present: Bool,
-        alertMessageAlignment: NSTextAlignment?,
-        alertTintColor: UIColor?
+        present: Bool
     ) {
         self.navigation = navigation
         self.root = root
         self.from = from
         self.present = present
-        self.alertMessageAlignment = alertMessageAlignment
-        self.alertTintColor = alertTintColor
         super.init(nibName: nil, bundle: nil)
     }
 
