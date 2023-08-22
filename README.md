@@ -6,7 +6,11 @@ Mobile architecture framework inspired by FlowController.
 
 this framework handle screen transition.
 
-## Doc
+## Installation
+
+[Swift Package Manager](https://www.swift.org/package-manager/) is supported.
+
+## Documentation
 
 - [Top](https://miyoshi-cq.github.io/swift-architecture-template-navigation/documentation/navigation/)
 - [Tutorial](https://miyoshi-cq.github.io/swift-architecture-template-navigation/tutorials/navigation/tutorial)
