@@ -19,9 +19,13 @@ public enum ShowType {
 @MainActor
 public protocol FlowController: UIViewController, FlowBase, FlowAlertPresentable {
     var delegate: FlowDelegate? { get set }
+    /// child constructor of flow
     var childProvider: (Child) -> UIViewController { get }
+    /// child asynchronouse constructor of flow
     var asyncChildProvider: ((Child) async -> UIViewController)? { get }
+    /// start flow lifecycle
     func start()
+    /// should call when flow end
     func clear()
 }
 
@@ -42,6 +46,12 @@ public extension FlowController {
 
 @MainActor
 public extension FlowController where T == Never {
+    /// create new flow
+    /// - Parameters:
+    ///   - _:  flow type
+    ///   - root: child for initial display
+    ///   - delegate: flow receive finish event of new flow
+    ///   - showType: choose push or modal
     func start<F: FlowController>(
         flowType _: F.Type,
         root: F.Child,
@@ -85,6 +95,10 @@ public extension FlowController where T == Never {
         }
     }
 
+    /// show error alert
+    /// - Parameters:
+    ///   - error: AppError
+    ///   - okAction: selecting ok button handler
     func show(error: AppError, okAction: ((UIAlertAction) -> Void)? = nil) {
         switch error {
         case let .normal(title, message):
@@ -156,6 +170,10 @@ public extension FlowController where T == NavigationController {
         navigation.viewControllers.first
     }
 
+    /// show child belonging to flow
+    /// - Parameters:
+    ///   - child: child belonging to flow
+    ///   - root: root or not
     func show(_ child: Child, root: Bool = false) {
         if let provider = asyncChildProvider {
             Task { @MainActor in
@@ -188,6 +206,12 @@ public extension FlowController where T == NavigationController {
         }
     }
 
+    /// create new flow
+    /// - Parameters:
+    ///   - _:  flow type
+    ///   - root: child for initial display
+    ///   - delegate: flow receive finish event of new flow
+    ///   - showType: choose push or modal
     func start<F: FlowController>(
         flowType _: F.Type,
         root: F.Child,
@@ -243,6 +267,10 @@ public extension FlowController where T == NavigationController {
         }
     }
 
+    /// show error alert
+    /// - Parameters:
+    ///   - error: AppError
+    ///   - okAction: selecting ok button handler
     func show(error: AppError, okAction: ((UIAlertAction) -> Void)? = nil) {
         switch error {
         case let .normal(title, message):
@@ -322,6 +350,12 @@ public extension FlowController where T == TabBarController {
         navigation.viewControllers?.first
     }
 
+    /// create new flow
+    /// - Parameters:
+    ///   - _:  flow type
+    ///   - root: child for initial display
+    ///   - delegate: flow receive finish event of new flow
+    ///   - showType: choose push or modal
     func start<F: FlowController>(
         flowType _: F.Type,
         root: F.Child,

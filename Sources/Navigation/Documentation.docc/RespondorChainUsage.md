@@ -4,7 +4,8 @@ Usage of respondor chain for screen transition.
 
 ## Overview
 
-you can use respondor chain fot screen transition.
+you can use [respondor chain](https://developer.apple.com/documentation/uikit/touches_presses_and_gestures/using_responders_and_the_responder_chain_to_handle_events) for screen transition.
+
 
 ### Definition
 
