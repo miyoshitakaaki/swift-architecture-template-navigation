@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/miyoshi-cq/swift-architecture-template-navigation",
+            url: "https://github.com/takaakimiyoshi/swift-architecture-template-navigation",
             .upToNextMajor(from: "1.0.0")
         ),
     ],
