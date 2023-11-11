@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         .package(
-            url: "https://github.com/takaakimiyoshi/swift-architecture-template-navigation",
+            url: "https://github.com/miyoshitakaaki/swift-architecture-template-navigation",
             .upToNextMajor(from: "1.0.0")
         ),
     ],
@@ -60,8 +60,8 @@ let package = Package(
 
 ## Documentation
 
-- [Getting Started](https://miyoshi-cq.github.io/swift-architecture-template-navigation/documentation/navigation/gettingstarted)
-- [Usage of respondor chain](https://miyoshi-cq.github.io/swift-architecture-template-navigation/documentation/navigation/respondorchainusage)
+- [Getting Started](https://miyoshitakaaki.github.io/swift-architecture-template-navigation/documentation/navigation/gettingstarted)
+- [Usage of respondor chain](https://miyoshitakaaki.github.io/swift-architecture-template-navigation/documentation/navigation/respondorchainusage)
 
 ## Generate docs
 
